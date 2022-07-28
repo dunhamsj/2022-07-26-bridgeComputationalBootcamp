@@ -2,16 +2,16 @@
 layout: workshop      # DON'T CHANGE THIS.
 carpentry: "swc"    # what kind of Carpentry (must be either "lc" or "dc" or "swc")
 venue: "Vanderbilt University and Fisk University"        # brief name of host site without address (e.g., "Euphoric State University")
-address: "Room 6322, 6301 Stevenson Center Lane, Nashville, TN"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
+address: "https://vanderbilt.zoom.us/j/91644622125?pwd=WklHTjFaektGSy9qVUpEMG8xZnl2dz09"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
 country: "us"      # lowercase two-letter ISO country code such as "fr" (see https://en.wikipedia.org/wiki/ISO_3166-1)
 language: "eng"     # lowercase two-letter ISO language code such as "fr" (see https://en.wikipedia.org/wiki/ISO_639-1)
 latlng: "36.1440983, -86.80213809999998"       # decimal latitude and longitude of workshop venue (e.g., "41.7901128,-87.6007318" - use https://www.latlong.net/)
-humandate: "Aug 5-21, 2020"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
-humantime: "1:00 pm - 5:00 pm"    # human-readable times for the workshop (e.g., "9:00 am - 4:30 pm")
-startdate: 2020-08-05      # machine-readable start date for the workshop in YYYY-MM-DD format like 2015-01-01
-enddate: 2020-08-21        # machine-readable end date for the workshop in YYYY-MM-DD format like 2015-01-02
-instructor: ["Mehnaaz Asad"] # boxed, comma-separated list of instructors' names as strings, like ["Kay McNulty", "Betty Jennings", "Betty Snyder"]
-email: ["mehnaaz.asad@vanderbilt.edu"]    # boxed, comma-separated list of contact email addresses for the host, lead instructor, or whoever else is handling questions, like ["marlyn.wescoff@example.org", "fran.bilas@example.org", "ruth.lichterman@example.org"]
+humandate: "July 26 - August 5, 2022"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
+humantime: "2:00 pm - 5:00 pm, Central Time"    # human-readable times for the workshop (e.g., "9:00 am - 4:30 pm")
+startdate: 2022-07-26      # machine-readable start date for the workshop in YYYY-MM-DD format like 2015-01-01
+enddate: 2022-08-05        # machine-readable end date for the workshop in YYYY-MM-DD format like 2015-01-02
+instructor: ["Sam Dunham"] # boxed, comma-separated list of instructors' names as strings, like ["Kay McNulty", "Betty Jennings", "Betty Snyder"]
+email: ["samuel.j.dunham@vanderbilt.edu"]    # boxed, comma-separated list of contact email addresses for the host, lead instructor, or whoever else is handling questions, like ["marlyn.wescoff@example.org", "fran.bilas@example.org", "ruth.lichterman@example.org"]
 collaborative_notes:             # optional: URL for the workshop collaborative notes, e.g. an Etherpad or Google Docs document
 eventbrite:           # optional: alphanumeric key for Eventbrite registration, e.g., "1234567890AB" (if Eventbrite is being used)
 ---
@@ -176,15 +176,15 @@ eventbrite:           # optional: alphanumeric key for Eventbrite registration, 
   for more information.
 </p>
 
-{% comment %} 
+{% comment %}
 <hr/>
 
 
- SURVEYS - DO NOT EDIT SURVEY LINKS 
+ SURVEYS - DO NOT EDIT SURVEY LINKS
 
 <h2 id="surveys">Surveys</h2>
 <p>Please be sure to complete these surveys before and after the workshop.</p>
-{% if site.carpentry == "swc" %} 
+{% if site.carpentry == "swc" %}
 <p><a href="{{ site.swc_pre_survey }}{{ site.github.project_title }}">Pre-workshop Survey</a></p>
 <p><a href="{{ site.swc_post_survey }}{{ site.github.project_title }}">Post-workshop Survey</a></p>
 {% elsif site.carpentry == "dc" %}

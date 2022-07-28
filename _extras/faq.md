@@ -1,7 +1,7 @@
 ---
 layout: page
 title: FAQ
-permalink: /faq/index.html
+permalink: /faq/
 ---
 
 ## General

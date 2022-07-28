@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124447956-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-124447956-1');
+        </script>
+        
+		<meta charset="utf-8">
+
+        <title>BCB-Day 03 - Introduction to Git</title>
+
+		<meta name="description" content="Bridge Computational Bootcamp - Day 05 - Intro to Git and Github">
+		<meta name="author" content="Mehnaaz Asad">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<!--Intro-->
+                <section>
+                    <h2><font color="orange">Version Control and Github</font> <br><font color="yellow"></font></h2>
+                </section>
+<!--Why it is important-->
+                <section>
+                    <section>
+                        <h2>Why is version control <font color="orange">important</font>?</h2>
+                    </section>
+                    <section>
+                        <h3>Why is version control <font color="orange">important</font>?</h3>
+                        <ul>
+                            <li class="fragment">Keep track of <em>changes</em> in your code</li>
+                            <li class="fragment">Making changes with confidence, and even <font color="#2ec7bf">reverting when needed</font></li>
+                            <li class="fragment">Relying on source control as the <font color="#2ec7bf">communication medium</font> for your team</li>
+                            <li class="fragment">Easily deploying different versions of your code</li>
+                            <li class="fragment">Understanding who made a change and <font color="#2ec7bf">when</font> it happened</li>
+                        </ul>
+                    </section>
+                </section>
+<!--Basic Concepts-->
+                <section>
+                    <section>
+                        <h2>Concepts</h2>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Types of Version Control - Centralized</font></h4>
+                        <font size=6>
+                            <p>
+                                It works in a <font color="orange">client-server</font> relationship. It's easy to understand and you have more <em>control</em> over users and access
+                            </p>
+                        </font>
+                        <img src="./images/image_05_03_git_type_centralized.png" alt="git_branch" height="250">
+                        <p><font size=6><a href="http://guides.beanstalkapp.com/version-control/intro-to-version-control.html" target="_blank">http://guides.beanstalkapp.com/version-control/intro-to-version-control.html</a></font></p>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Types of Version Control - Distributed</font></h4>
+                        <font size=6>
+                            <p>
+                                More powerful and detailed change tracking &rarr; less conflicts! No server is necessary. <font color="#2ec7bf">Git</font> is an example of this type of version control.
+                            </p>
+                        </font>
+                        <img src="./images/image_05_04_git_type_distributed.png" alt="git_branch" height="250">
+                        <p><font size=6><a href="http://guides.beanstalkapp.com/version-control/intro-to-version-control.html" target="_blank">http://guides.beanstalkapp.com/version-control/intro-to-version-control.html</a></font></p>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Tracking changes</font></h4>
+                        <font size=6>
+                            <p>
+                                A version control is mostly based around one concept:<br><br><font color="orange"><u>Tracking changes that happen within directories or files</u></font>
+                            </p>
+                            <p>In most cases</p>
+                            <ul>
+                                <li>Specify which files/directories to keep track of</li>
+                                <li>The set of files or directories under version control are called a <font color="orange">repository</font></li>
+                            </ul>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Creating a repository</font></h4>
+                        <font size=6>
+                            <p>
+                                You can either create one on Github and clone it or initialize a directory already on your computer.
+                            </p>
+                            <p class="fragment">You would do a <font color="orange"><code>git init</code></font> to initialize an existing directory. This will produce a <font color="orange"><code>.git/</code></font> folder</p>
+                            <p class="fragment"> OR </p>
+                            <p class="fragment">You would need to do a <font color="orange"><code>git clone <i>URL</i></code></font> to copy the remote repository locally. The remote repo is <em>locally</em> given the name <em>origin</em>.</p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Adding &amp; Staging</font></h4>
+                        <font size=6>
+                            <p>
+                                Important vocab: <font color="orange">working directory</font> is different from the <font color="orange">local repository</font>.
+                            </p>
+                            <p class="fragment">The project folder is the working directory. That's where files are created and edited.</p>
+                            <p class="fragment">The <font color="orange"><code>.git/</code></font> folder in the working directory is the local repository.</p>
+                            <p class="fragment">When you <font color="orange"><code>git add</code></font> you move the file to the <em>staging area</em> which is the index file in <font color="orange"><code>.git/</code></font>. Think of it like a rough draft space.</p>
+                            <p class="fragment">Note: If you <font color="orange"><code>git add</code></font> and change the file <em>before</em> committing, you will need to <font color="orange"><code>git add</code></font> again.</p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Committing</font></h4>
+                        <font size=6>
+                            <p>
+                                As you work with your files that are under <em>version control</em>, each change is <font color="#2ec7bf">tracked automatically</font>!
+                            </p>
+                            <ul class="fragment">
+                                <li>This can include:</li>
+                                <ul>
+                                    <li>Modifying a file</li>
+                                    <li>Deleting a file</li>
+                                    <li>Adding files to repository</li>
+                                    <li>Moving files</li>
+                                    <li>etc ...</li>
+                                </ul>
+                            </ul>
+                            <p class="fragment">When you are ready to move the file to the next version of the project, <font color="orange"><code>git commit</code></font> moves it to <font color="orange"><code>.git/objects/</code></font> which is the commit history.</p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Getting updates</font></h4>
+                        <font size=6>
+                            <p>
+                                As members of your team commit changes, it is important that you have the <font color="#2ec7bf">latest version</font> &rarr; Reduces chance of <em>conflict</em>
+                            </p>
+                            <p class="fragment">You would do a <font color="orange"><code>git fetch</code></font> followed by a <font color="orange"><code>git merge</code></font>.</p>
+                            <p class="fragment"> OR </p>
+                            <p class="fragment">You would need to do a <font color="orange"><code>git pull</code></font> (= git fetch + git merge) to update.</p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Diffing (or viewing the differences)</font></h4>
+                        <font size=6>
+                            <p>
+                                Since each commit is recorded as a <em>change</em> of a file or set of files, it is sometimes useful to view what changed between revisions.
+                            </p>
+                            <p>
+                                Most versions controls let you <font color="orange">compare</font> two files to see which <em>lines of code</em> changed!
+                            </p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Deleting files</font></h4>
+                        <font size=6>
+                            <p>
+                                If you have never added a file, you can just delete it normally.
+                            </p>
+                            <p class="fragment">If you did a <font color="orange"><code>git add</code></font> atleast once then <font color="orange"><code>git rm <i>filename</i></code></font>.</p>
+                            <p class="fragment">If your file is being tracked and you want git to stop tracking it (but not delete it!) then do a <font color="orange"><code>git rm --cached <i>filename</i></code></font>.</p>
+                            <p class="fragment">Don't forget to commit these changes!</p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Dot files</font></h4>
+                        <font size=6>
+                            <p>
+                                .gitconfig &amp; .gitignore
+                            </p>
+                            <p class="fragment">.gitconfig contains setting that git will use. It is located in your home directory and applies to all your repos but you can override this by changing the config file for each repo stored in <font color="orange"><code>.git/config</code></font></p>
+                            <p class="fragment">.gitignore settings can also be set on an individual repo basis or on a global basis. It contains a list of files that git will ignore and not push to the remote repo.</p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Branching</font></h4>
+                        <font size=6>
+                            <p>
+                                If you want to <font color="orange">experiment with code</font> that could <em>break</em> your repository, you could create a <font color="#2ec7bf">branch</font>.
+                            </p>
+                        </font>
+                        <img src="./images/image_05_02_git_branch.png" alt="git_branch">
+                        <p><font size=6><a href="https://guides.github.com/introduction/flow/" target="_blank">https://guides.github.com/introduction/flow/</a></font></p>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Branching</font></h4>
+                        <font size=6>
+                            <p>
+                                Your local working directory always represents one branch. 
+                            </p>
+                            <p>    
+                                To see the branches that exist: <font color="orange"><code>git branch</code></font>
+                            </p>
+                            <p>
+                                To create a branch: <font color="orange"><code>git branch <i>branchname</i> </code></font>
+                            </p>
+                            <p>
+                                To change your working directory to the new branch: <font color="orange"><code>git checkout <i>branchname</i> </code></font>
+                            </p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">Contributing to an existing repository</font></h4>
+                        <font size=6>
+                            <p>
+                                If you want to implement changes in a big public source code repo then you want to fork it to make sure your changes don't break the code.
+                            </p>
+                            <p class="fragment">The forked repository is your <font color="orange">independent copy</font> which you should then clone.</p>
+                            <p class="fragment">Once you're done making changes locally, you need to submit a pull request to merge your changes back to the source repository.</p>
+                            <p class="fragment">If after forking you left your repo for a while and changes have been committed to the source code you will want to make sure you have the updated version. You can find instructions on doing that here: <a href="https://stackoverflow.com/questions/7244321/how-do-i-update-a-github-forked-repository" target="_blank">how do I update a github forked repository</a></p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">To branch or to fork?</font></h4>
+                        <font size=6>
+                            <p>
+                                Both are ways to diverge from the main source code.
+                            </p>
+                            <p class="fragment">A branch, like a branch of a tree, remains part of the original repository. The code that is branched (main trunk) and the branch know and rely on each other and the branch knows about the code it originated from.</p>
+                            <p class="fragment">A fork is <font color="orange">independent</font> from the original repository. If the original repository is deleted, the fork remains. If you fork a repository, you get that repository and all of its branches.</p>
+                        </font>
+                    </section>
+                    <section>
+                        <h4>Concepts - <font color="orange">You made a commit and want to undo it?</font></h4>
+                        <font size=10>
+                            <p>
+                                <a href="https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/#:~:text=Before%20executing%20git%20reset%20%2D%2D,them%20at%20some%20later%20time." target="_blank">Numerous undo possibilities in Git</a>
+                            </p>
+                        </font>
+                    </section>
+                </section>
+<!--Git commands-->
+                <section>
+                    <section>
+                        <h2>Git commands</h2>
+                    </section>
+                    <section>
+                        <h3>Git commands</h3>
+                        <p>Tipically, the git flow is:</p>
+                        <ul>
+                            <li class="fragment"><code><font color="orange">git init</font></code> - Initialized repository </li>
+                            <li class="fragment"><code><font color="orange">git add</font></code> - Adds files and directories to repo</li>
+                            <li class="fragment"><code><font color="orange">git commit</font></code> - Commits your changes</li>
+                            <li class="fragment"><code><font color="orange">git push <i>remote_repo_name</i> <i>branch_name</i></font></code> - Push to your <em>remote</em> repository</li>
+                        </ul>
+                        <p class="fragment">
+                            There are other commands like: <code><font color="orange">git clone</font></code>, <code><font color="orange">git merge</font></code>, <code><font color="orange">git status</font></code>, <code><font color="orange">git branch</font></code>, <code><font color="orange">git checkout </font></code>, <code><font color="orange">git pull</font></code> and many more!
+                        </p>
+                    </section>
+                </section>
+<!--Git and Github-->
+                <section>
+                    <section>
+                        <h2>Git and Github</h2>
+                    </section>
+                    <section>
+                        <h3>Git and Github</h3>
+                        <ul>
+                            <li class="fragment"><font color="orange">Github</font> is the platform that many people use to <em>host</em> their repositories.</li>
+                            <li class="fragment">This repository is hosted on Github!</li>
+                            <li class="fragment">You can use this along with the <code><font color="orange">cookiecutter Project template</font></code></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Steps to create a repository</h3>
+                        <ul>
+                            <li class="fragment">Create a <font color="orange">username</font> and <font color="orange">password</font></li>
+                            <li class="fragment">Click on <font color="orange">New repository"</font></li>
+                            <li class="fragment">Fill in the details like <em>name of repository</em>, <em>privacy settings</em>, etc.</li>
+                            <li class="fragment">To <code>clone</code> it locally, go to the directory (that will host the repository) using the Terminal</li>
+                            <li class="fragment">Copy and paste the commands on the screen to your Terminal window</li>
+                            <li class="fragment">And now you have a <font color="orange">local</font> copy of your repository!!</li>
+                        </ul>
+                    </section>
+                </section>
+<!--Exercise-->
+                <section data-background="#846A65">
+                    <h3>Exercise</h3>
+                    <p>Create a project repository on Github and clone it onto your computer</p>
+                    <ul>
+                        <li><font color="orange"><code>Author - </code></font>Your name</li>
+                        <li><font color="orange"><code>License - </code></font>MIT</li>
+                        <li><font color="orange"><code>Project name - </code></font>2020_Bootcamp_Github_repo</li>
+                    </ul>
+                </section>
+<!--Adding SSH Keys-->
+                <section>
+                    <section>
+                        <h2>Github SSH Keys</h2>
+                    </section>
+                    <section>
+                        <h3>Github SSH Keys</h3>
+                        <p>Now you will want to create <font color="orange">SSH keys</font> for your Github account</p>
+                        <ul>
+                           <li>First you need to create your key:</li> 
+                        </ul>
+                        <pre><font ><code class="hljs" data-trim contenteditable>
+                        $ cd ~/.ssh
+                        $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+                        $ Generating public/private rsa key pair.
+                        Enter file in which to save the key (/Users/calder/.ssh/id_rsa): github_key
+                        Enter passphrase (empty for no passphrase):
+                        Enter same passphrase again:
+                        $ ls
+                        github_key
+                        github_key.pub
+                        $ chmod 600 github_key*
+                        $ mv github_key ssh_keys/
+                        $ mv github_key.pub pub_keys
+                        </code></font></pre>
+                    </section>
+                    <section>
+                        <h3>Github SSH Keys</h3>
+                        <ul>
+                           <li>Now open <code><font color="orange">~/.ssh/config</font></code></li> 
+                        </ul>
+                        <pre><font ><code class="hljs" data-trim contenteditable>
+                        open ~/.ssh/config
+                        </code></font></pre>
+                        <p>and add this to the file</p>
+                        <pre><font size=4><code class="hljs" data-trim contenteditable>
+                        ## Connects to Github
+                        Host github.com
+                        HostName github.com
+                        User git
+                        IdentityFile ~/.ssh/ssh_keys/github_key
+                        IdentitiesOnly yes
+                        PreferredAuthentications publickey
+                        </code></font></pre>
+                    </section>
+                    <section>
+                        <h3>Github SSH Keys</h3>
+                        <font size=5>
+                            <p>
+                                Follow the instructions on:<br><a href="https://help.github.com/articles/connecting-to-github-with-ssh/" alt="github_ssh">https://help.github.com/articles/connecting-to-github-with-ssh/</a>                            
+                        </font>
+                        <pre><font size=5><code class="hljs" data-trim contenteditable>
+                        ls -al ~/.ssh
+                        eval "$(ssh-agent -s)"
+                        ssh-add ~/.ssh/ssh_keys/* # or ssh-add -K ~/.ssh/id_rsa if in Mac
+                        </code></font></pre>
+                        <p>And now test your connection</p>
+                        <pre><font size=5><code class="hljs" data-trim contenteditable>
+                        # Attempts to ssh to GitHub
+                        ssh -T git@github.com
+                        
+                        ## You should see something like this
+                        The authenticity of host 'github.com (IP ADDRESS)' can't be established.
+                        RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+                        Are you sure you want to continue connecting (yes/no)?
+                        ## You should see this
+                        Hi username! You've successfully authenticated, but GitHub does not
+                        provide shell access.
+                        </code></font></pre>
+                    </section>
+                    <section>
+                        <h2>You are now able to use <code><font color="orange">git</font></code> and <code><font color="orange">Github</font></code>!!</h2>
+                    </section>
+                </section>
+                
+<!--Back to Main website-->
+                <section>
+                    <p>Back to main website:</p>
+                    <h3><a href="https://tinyurl.com/bcb-2020">https://tinyurl.com/bcb-2020</a></h3>
+                </section>
+<!---->
+<!---->
+
+<!---->
+<!---->
+
+                
+<!---->
+<!---->
+
+<!---->
+<!---->
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+<style type="text/css">
+    /* 1. Style header/footer <div> so they are positioned as desired. */
+    #header-left {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        font-size: 0.5em;
+        color: lightgrey
+    }
+    #header-right {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        font-size: 0.5em;
+    }
+    #footer-left {
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+        font-size: 0.5em;
+        color: lightgrey
+    }
+</style>
+
+<!-- 2. Create hidden header/footer <div> -->
+<div id="hidden" style="display:none;">
+    <div id="header">
+        <div id="header-left">Bridge Computational Bootcamp</div>
+        <div id="header-right">Day 02</div>
+        <div id="footer-left">Mehnaaz Asad (2020)</div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+    var header = $('#header').html();
+    if ( window.location.search.match( /print-pdf/gi ) ) {
+        Reveal.addEventListener( 'ready', function( event ) {
+            $('.slide-background').append(header);
+        });
+    }
+    else {
+        $('div.reveal').append(header);
+   }
+</script>
+	</body>
+</html>

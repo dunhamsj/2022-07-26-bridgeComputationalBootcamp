@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124447956-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-124447956-1');
+        </script>
+        
+		<meta charset="utf-8">
+
+        <title>BCB-Day 03 - Bash and Terminal</title>
+
+		<meta name="description" content="Bridge Computational Bootcamp - Day 03 - Bash and Terminal">
+		<meta name="author" content="Mehnaaz Asad">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<!--Intro-->
+                <section>
+                    <h2><font color="orange">Customizing your<br>Terminal</font></h2>
+                </section>
+<!--Why SSH?-->
+                <section>
+                    <section>
+                        <h2>Customizing your Terminal</h2>
+                        <ul>
+                            <li class="fragment"><font color="orange">bashrc</font> and <font color="orange">bash_profile</font></li>
+                            <li class="fragment">Modifying your prompt</li>
+                            <li class="fragment">Aliases</li>
+                            <li class="fragment">Environment variables</li>
+                            <li class="fragment">Paths</li>
+                        </ul>
+                        <p class="fragment">You should <font color="orange">customize</font> your shell according to your needs!</p>
+
+                    </section>
+                </section>
+<!--Bashrc and Bash_profile-->
+                <section>
+                    <section>
+                        <h2><font color="orange"><code>bashrc</code></font> and <font color="orange"><code>bash_profile</code></font></h2>
+                        <ul class="fragment">
+                            <li><font color="orange"><code>bashrc</code></font>: Executed for <u> non-login shells </u></li>
+                            <li><font color="orange"><code>bash_profile</code></font>: Executed once when <u>starting </u> shell</li>
+                        </ul>
+                        <p class="fragment">But most of the settings go in <font color="orange"><code>bash_profile</code></font> file!</p>
+                        <p class="fragment" size="2">In Mac OSX, <font color="orange">both</font> files exist. In Linux, only <em>one</em> is used!</p>
+                    </section>
+                    <section>
+                        <h3>You can use these files to customize how your shell session behaves, as well
+                            adding new <font color="orange">environment variables!</font>
+                        </h3>
+                    </section>
+                </section>
+<!--Starting your 'bashrc' file-->
+                <section>
+                    <section>
+                        <h3>Setting up your <code>SHELL</code> session</h3>
+                    </section>
+                </section>
+<!--Modifying your prompt-->
+                <section>
+                    <section>
+                        <h3>Modifying your prompt</h3>
+                        <ul>
+                            <li>Open the terminal and type: <code><font color="orange">vim ~/.bashrc</font></code>.
+                            (If it doesn't exist, create it with <code>touch</code>.)</li>
+                        </ul>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        parse_git_branch() {
+                            git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+                        }
+
+                        export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$(parse_git_branch)\[\033[00m\] "
+                        export CLICOLOR=1
+                        export LSCOLORS=ExFxBxDxCxegedabagacad
+                        alias ls='ls -GFh'
+                        </code></pre>
+                        <ul>
+                            <li>Type <font color="orange">:wq</font> to save and exit out of vim</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Modifying your prompt</h3>
+                        <ul>
+                            <li>This function extracts the current <font color="orange">git</font> branch.</li>
+                        </ul>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        parse_git_branch() {
+                            git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+                        }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Modifying your prompt</h3>
+                        <ul>
+                            <li>Changes the bash prompt to be colorized, and rearranges the print to
+                            be <code><font color="orange">username@hostname:cwd $(git-branch)</font></code></li>
+                        </ul>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$(parse_git_branch)\[\033[00m\] "
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Modifying your prompt</h3>
+                        <ul>
+                            <li>The next two lines enable command line colors, and define colors for the <code>'ls'</code> command</li>
+                        </ul>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        export CLICOLOR=1
+                        export LSCOLORS=ExFxBxDxCxegedabagacad
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Modifying your prompt</h3>
+                        <ul>
+                            <li><code><font color="orange">-G</font></code>: Colorizes output</li>
+                            <li><code><font color="orange">-h</font></code>: Makes sizes human readable</li>
+                            <li><code><font color="orange">-F</font></code>: Throws a '/' after a directory, '*' after an executable, 
+                            and a '@' after a symlink</li>
+                        </ul>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        alias ls='ls -GFh'
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Modifying your prompt</h3>
+                        <p>You can modify how the command prompt <font color="orange"> looks </font> </p>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        username@hostname:/path/to/working/directory (git-status)
+                        </code></pre>
+                        <p class="fragment">You can add this to <font color="orange">bashrc</font> file!</p>
+                    </section>
+                    <section>
+                        <h3>Modifying your prompt</h3>
+                        <a href="https://github.com/VandyAstroML/2020_08_02_Fall_Bridge_Computational_Bootcamp/tree/master" target="_blank">2020 - Fall Bridge Computational Bootcamp<br>Repository</a>
+                        <p>Under <a href="https://github.com/VandyAstroML/2020_08_02_Fall_Bridge_Computational_Bootcamp/tree/master/data/day_03/dot_files" target="_blank"><u><code>data >> day_03 >> dot_files</code></u></a></p>
+                        <p class="fragment">These are a set of sample <em>dot</em> files that you can add to your main directory.</p>
+                    </section>
+                    <section>
+                        <h3>Modifying your prompt</h3>
+                        <p>Or you can use <a href="http://ezprompt.net/" target="_blank">http://ezprompt.net/</a> to also customize your prompt:</p>
+                        <img src="./images/image_03_00_prompt.png" alt="prompt_generator" width="400">
+                    </section>
+                </section>
+<!--Aliases-->
+                <section>
+                    <section>
+                        <h3>Aliases</h3>
+                        <ul>
+                            <li class="fragment">Keyboard <font color="orange">shortcuts</font>!</li>
+                            <li class="fragment">For <em>simple</em> and <em>complex</em> commands</li>
+                            <li class="fragment">Temporary or <em>permanent</em></li>
+                            <li class="fragment">Used to navigate your terminal</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Aliases</h3>
+                        <p>I like to save my aliases in <br><code><font color="orange">~/.aliases</font></code></p>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        ############################## --- GENERAL --- ################################
+                        alias   lll='ls -lah'
+                        alias   LLL=lll
+                        alias   lla=lll
+                        alias   llh='ls -lh'
+                        alias   llt='ls -lahtr'
+                        alias    LS='ls'
+                        alias    sl='ls'
+                        </code></pre>
+                        <p class="fragment">... and many more</p>
+                    </section>
+                    <section>
+                        <h3>Creating aliases</h3>
+                    </section>
+                    <section>
+                        <h3>Creating aliases</h3>
+                        <p>If you want a <font color="#136BB9">temporary</font> alias, type</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        alias name_of_alias="command"
+                        </code></pre>
+                        <p>For example:</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        alias ll="ls -al"
+                        </code></pre>
+                        <p class="fragment">Now whenever you type <font color="orange"><code>ll</code></font>, the system will understand it as <font color="orange"><code>ls -al</code></font></p>
+                    </section>
+                    <section>
+                        <h3>Creating aliases</h3>
+                        <p>If you want a <font color="orange">permanent</font> alias, you need to modify your <font color="orange"><code>~/.aliases</code></font> file</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        ## Example of other aliases
+                        alias pushd='cd -'
+                        alias    CD='cd'
+                        alias  tree='tree -C'
+                        alias crone='crontab -e'
+                        alias cronl='crontab -l'
+                        alias    jb='jupyter notebook'
+                        </code></pre>
+                        <p>This
+                            <u><a href="https://raw.githubusercontent.com/VandyAstroML/2020_08_02_Fall_Bridge_Computational_Bootcamp/master/data/day_03/dot_files/.aliases" target="_blank">file</a></u>
+                            is a compilation of <em>useful</em> aliases for your terminal! Make sure to source the file!!
+                        </p>
+                        <p class="fragment">(See the <font color="orange"><a href="https://github.com/VandyAstroML/2020_08_02_Fall_Bridge_Computational_Bootcamp" target="_blank">repository</a></font>)</p>
+                    </section>
+                    <section>
+                        <h3>Removing aliases</h3>
+                        <p>If you want to <u><b>remove</b></u> an alias, type:</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        unalias command_name
+                        </code></pre>
+                        <p class="fragment">This will <em>remove</em> the alias from the <u><em><font color="orange">current</font></em></u> session!</p>
+                        <p class="fragment">For example:</p>
+                        <pre class="fragment"><code class="hljs" data-trim contenteditable>
+                        # This will remove the 'crone' alias
+                        unalias crone
+                        </code></pre>
+                        <p class="fragment">If you want remove a <font color="orange">permanent</font> alias, you will need to edit your <font color="orange">~/.aliases</font> file!</p>
+                    </section>
+                    <section>
+                        <h3>Aliases</h3>
+                        <p>Whenever you modify your <font color="orange">~/.aliases</font> file, you need to source it <u>again:</u></p>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        source ~/.aliases
+                        </code></pre>
+                        <p class="fragment">This will <em>update</em> the aliases in your <u><font color="orange">current</font></u> session</p>
+                    </section>
+                    <section data-background="#900000 ">
+                        <h3>Exercise</h3>
+                        <ul>
+                            <li>Create a <u>temporary</u> alias for <font color="orange"><br>"<code>ping www.google.com</code>"</font></li>
+                            <li>Add the aliases from the <font color="orange"><code>.aliases</code></font> file from the repository to your <em>local</em> version</li>
+                            <ul>
+                                <li>Go to <a href="https://tinyurl.com/bcb20-repo-main" target="_blank">https://tinyurl.com/bcb20-repo-main</a></li>
+                                <li>Make sure you're in the "<code>master</code>" branch</li>
+                                <li>Copy the aliases in the <code>.aliases</code> file to your <code>.aliases</code> file in <font color="orange"><code>$HOME</code></font> directory.</li>
+                            </ul>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Aliases</h2>
+                        <p>For more info on <font color="orange">aliases</font> and how to use them, <br>see:</p>
+                        <a href="https://jonsuh.com/blog/bash-command-line-shortcuts/" target="_blank">https://jonsuh.com/blog/bash-command-line-shortcuts/</a>
+                    </section>
+                </section>
+<!--Environment variables-->
+                <section>
+                    <section>
+                        <h2>Environment variables</h2>
+                    </section>
+                    <section>
+                        <h3>Environment variables</h3>
+                        <ul>
+                            <li class="fragment">When the <font color="orange">shell session</font> starts, the system compiles info that should be available to the <font color="orange">shell</font> session.</li>
+                            <li class="fragment"><font color="orange">Key</font>-<font color="#136BB9">value</font> pairs</li>
+                            <li class="fragment"><font color="orange">Temporary</font> or <font color="#136BB9">permanent</font></li>
+                        </ul>
+                        <p class="fragment">Typically, environment variables look like:</p>
+                        <pre class="fragment"><font size=20><code class="hljs" data-trim contenteditable>
+                        KEY="value with spaces"
+                        </code></font></pre>
+                        <p class="fragment">or</p>
+                        <pre class="fragment"><font size=20><code class="hljs" data-trim contenteditable>
+                        KEY=value1:value2:...
+                        </code></font></pre>
+                    </section>
+                    <section>
+                        <h3>Creating environment variables</h3>
+                        <p>Creating a <u>shell</u> variable named <font color="orange"><code>TEST_VAR</code></font></p>
+                        <pre><code class="hljs" data-trim contenteditable>
+                        TEST_VAR='Hello World!'
+                        </code></pre>
+                        <p class="fragment">And you can access it by:</p>
+                        <pre class="fragment"><code class="hljs" data-trim contenteditable>
+                        echo $TEST_VAR
+                        </code></pre>
+                        <p class="fragment">Now you need to <u>export</u> the variable</p>
+                        <pre class="fragment"><code class="hljs" data-trim contenteditable>
+                        export TEST_VAR
+                        </code></pre>
+                        <p class="fragment">This will ensure that your variable <font color="orange"><code>TEST_VAR</code></font><br>is available!</p>
+                    </section>
+                    <section>
+                        <h3>Using environment variables</h3>
+                        <p><font size=6>You can set environment variables in your current shell, or you can make them <u><font color="orange">permanent</font></u></font></p>
+                        <p><font size=6>You can do this adding them to your <font color="orange"><code>~/.bash_profile</code></font> file</font></p>
+                        <pre class="fragment"><code class="hljs" data-trim contenteditable>
+                        ## .bashrc file
+                        ...
+                        # Defining environment variable TEST_VAR
+                        TEST_VAR='Hello World!'
+                        export TEST_VAR
+                        ...
+                        </code></pre>
+                        <p class="fragment"><font size=6>and type this in the terminal</font></p>
+                        <pre class="fragment"><code class="hljs" data-trim contenteditable>
+                        source ~/.bashrc
+                        </code></pre>
+                        <p class="fragment"><font size=6>This will <code>source</code> the new <font color="orange">environment variables</font>!</font></p>
+                    </section>
+                    <section>
+                        <h2>Environment Variables</h2>
+                        <p>For more information on <font color="orange">environment variables</font>, <br> see:</p>
+                        <a href="https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-a-linux-vps#setting-shell-and-environmental-variables" target="_blank">https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-a-linux-vps#setting-shell-and-environmental-variables</a>
+                    </section>
+                </section>
+<!--Files from Github Repository-->
+                <section>
+                    <section>
+                        <h3>Putting it all together ...</h3>
+                        <p>You learned how to</p>
+                        <ul>
+                            <li class="fragment">Customize the way your <font color="orange">terminal prompt</font> looks</li>
+                            <li class="fragment">Edit your <font color="orange"><code>~/.bashrc</code></font> file</li>
+                            <li class="fragment">Work with <font color="orange"><code>aliases</code></font></li>
+                            <li class="fragment">Set <font color="orange">environment variables</font></li>
+                        </ul>
+                        <p class="fragment">Now you can add/modify your environment. You can use the <code>dot</code> files found at:</p>
+                        <a class="fragment" href="https://tinyurl.com/bcb20-repo-main" target="_blank">https://tinyurl.com/bcb20-repo-main</a>
+                        <p class="fragment">(Note: Make sure you're in the <font color="#136BB9"><code>master</code> branch!</font>)</p>
+                    </section>
+                </section>
+<!--Back to Main website-->
+                <section>
+                    <p>Back to main website:</p>
+                    <h3><a href="https://tinyurl.com/bcb-2020">https://tinyurl.com/bcb-2020</a></h3>
+                </section>
+<!---->
+
+<!---->
+
+<!---->
+<!---->
+
+                
+<!---->
+<!---->
+
+<!---->
+<!---->
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+<style type="text/css">
+    /* 1. Style header/footer <div> so they are positioned as desired. */
+    #header-left {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        font-size: 0.5em;
+        color: lightgrey
+    }
+    #header-right {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        font-size: 0.5em;
+    }
+    #footer-left {
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+        font-size: 0.5em;
+        color: lightgrey
+    }
+</style>
+
+<!-- 2. Create hidden header/footer <div> -->
+<div id="hidden" style="display:none;">
+    <div id="header">
+        <div id="header-left">Bridge Computational Bootcamp</div>
+        <div id="header-right">Day 02</div>
+        <div id="footer-left">Mehnaaz Asad (2020)</div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+    var header = $('#header').html();
+    if ( window.location.search.match( /print-pdf/gi ) ) {
+        Reveal.addEventListener( 'ready', function( event ) {
+            $('.slide-background').append(header);
+        });
+    }
+    else {
+        $('div.reveal').append(header);
+   }
+</script>
+	</body>
+</html>

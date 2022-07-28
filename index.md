@@ -2,7 +2,7 @@
 layout: workshop      # DON'T CHANGE THIS.
 carpentry: "swc"    # what kind of Carpentry (must be either "lc" or "dc" or "swc")
 venue: "Vanderbilt University and Fisk University"        # brief name of host site without address (e.g., "Euphoric State University")
-address: "https://vanderbilt.zoom.us/j/91644622125?pwd=WklHTjFaektGSy9qVUpEMG8xZnl2dz09"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
+address: "Room 6322, 6301 Stevenson Center Lane, Nashville, TN (Zoom: https://vanderbilt.zoom.us/j/91644622125?pwd=WklHTjFaektGSy9qVUpEMG8xZnl2dz09)"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
 country: "us"      # lowercase two-letter ISO country code such as "fr" (see https://en.wikipedia.org/wiki/ISO_3166-1)
 language: "eng"     # lowercase two-letter ISO language code such as "fr" (see https://en.wikipedia.org/wiki/ISO_639-1)
 latlng: "36.1440983, -86.80213809999998"       # decimal latitude and longitude of workshop venue (e.g., "41.7901128,-87.6007318" - use https://www.latlong.net/)
